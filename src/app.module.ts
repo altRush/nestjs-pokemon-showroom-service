@@ -6,6 +6,9 @@ import { PokemonTeamsModule } from './pokemon-teams/pokemon-teams.module';
 import { PokemonTeamsController } from './pokemon-teams/pokemon-teams.controller';
 import { PokemonTeamsService } from './pokemon-teams/pokemon-teams.service';
 import { HttpModule } from '@nestjs/axios';
+import { PokemonProfileModule } from './pokemon-profile/pokemon-profile.module';
+import { PokemonProfileController } from './pokemon-profile/pokemon-profile.controller';
+import { PokemonProfileService } from './pokemon-profile/pokemon-profile.service';
 
 @Module({
   imports: [
@@ -14,8 +17,13 @@ import { HttpModule } from '@nestjs/axios';
     }),
     PokemonTeamsModule,
     HttpModule,
+    PokemonProfileModule,
   ],
-  controllers: [AppController, PokemonTeamsController],
-  providers: [AppService, PokemonTeamsService],
+  controllers: [
+    AppController,
+    PokemonTeamsController,
+    PokemonProfileController,
+  ],
+  providers: [AppService, PokemonTeamsService, PokemonProfileService],
 })
 export class AppModule {}
