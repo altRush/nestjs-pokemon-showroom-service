@@ -9,6 +9,7 @@ import { HttpModule } from '@nestjs/axios';
 import { PokemonProfileModule } from './pokemon-profile/pokemon-profile.module';
 import { PokemonProfileController } from './pokemon-profile/pokemon-profile.controller';
 import { PokemonProfileService } from './pokemon-profile/pokemon-profile.service';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { PokemonProfileService } from './pokemon-profile/pokemon-profile.service
     PokemonTeamsModule,
     HttpModule,
     PokemonProfileModule,
+    DatabaseModule,
   ],
   controllers: [
     AppController,
