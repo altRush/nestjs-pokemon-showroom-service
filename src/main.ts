@@ -5,7 +5,7 @@ async function bootstrap() {
   const stringPORT = process.env?.PORT;
   const PORT = stringPORT ? +stringPORT : 3000;
   const app = await NestFactory.create(AppModule, {
-    logger: ['error', 'warn'],
+    logger: ['error', 'warn', 'log'],
   });
   await app.listen(PORT);
   console.log(`Server is running at port ${PORT}`);
