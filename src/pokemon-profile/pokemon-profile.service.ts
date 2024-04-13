@@ -13,7 +13,12 @@ export class PokemonProfileService {
     pokemonIdOrName: string,
   ): Promise<PokemonProfileDto> {
     const {
-      data: { name, id, sprites, types },
+      data: {
+        name,
+        id,
+        sprites,
+        types: [type1, type2],
+      },
     } = await firstValueFrom(
       this.httpService
         .get(`https://pokeapi.co/api/v2/pokemon/${pokemonIdOrName}`)
@@ -29,8 +34,8 @@ export class PokemonProfileService {
       name,
       id,
       imageUrl: sprites.front_default,
-      type1: types[0].type.name,
-      type2: types[1].type.name || null,
+      type1: type1.type.name,
+      type2: type2.type.name || null,
     };
   }
 }

@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { PokemonTeamsService } from './pokemon-teams.service';
 import { PokemonTeamsController } from './pokemon-teams.controller';
 import { HttpModule } from '@nestjs/axios';
+import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
-  imports: [HttpModule],
+  imports: [HttpModule, DatabaseModule],
   providers: [PokemonTeamsService],
   controllers: [PokemonTeamsController],
 })

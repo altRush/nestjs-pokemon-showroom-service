@@ -1,15 +1,26 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Delete, Post, Put } from '@nestjs/common';
 import { PokemonTeamsService } from './pokemon-teams.service';
-import { PokemonProfile } from 'src/common/pokemon-profile.interface';
+import { CreatePokemonTeamDto, UpdatePokemonTeamDto } from './dto';
 
 @Controller('pokemon-teams')
 export class PokemonTeamsController {
   constructor(private readonly pokemonTeamsService: PokemonTeamsService) {}
 
-  @Get(':pokemonId')
-  getPokemonById(
-    @Param('pokemonId') pokemonId: string,
-  ): Promise<PokemonProfile> {
-    return this.pokemonTeamsService.getPokemonById(pokemonId);
+  @Post('create-team')
+  createPokemonTeam(@Body() payload: CreatePokemonTeamDto): Promise<void> {
+    return this.pokemonTeamsService.createPokemonTeam(payload);
+  }
+
+  @Put('update-team')
+  updatePokemonTeam(
+    @Body() body: { id: string; payload: UpdatePokemonTeamDto },
+  ): Promise<void> {
+    const { id, payload } = body;
+    return this.pokemonTeamsService.updatePokemonTeam(id, payload);
+  }
+
+  @Delete('delete-team')
+  deletePokemonTeam(@Body() id: string): Promise<void> {
+    return this.pokemonTeamsService.deletePokemonTeam(id);
   }
 }
