@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  ValidationPipe,
 } from '@nestjs/common';
 import { PokemonTeamsService } from './pokemon-teams.service';
 import { CreatePokemonTeamDto, UpdatePokemonTeamDto } from './dto';
@@ -15,7 +16,9 @@ export class PokemonTeamsController {
   constructor(private readonly pokemonTeamsService: PokemonTeamsService) {}
 
   @Post('create-team')
-  createPokemonTeam(@Body() payload: CreatePokemonTeamDto): Promise<void> {
+  createPokemonTeam(
+    @Body(ValidationPipe) payload: CreatePokemonTeamDto,
+  ): Promise<void> {
     return this.pokemonTeamsService.createPokemonTeam(payload);
   }
 
