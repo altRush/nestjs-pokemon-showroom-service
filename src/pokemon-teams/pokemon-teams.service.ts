@@ -24,12 +24,12 @@ export class PokemonTeamsService {
     id: string,
     payload: UpdatePokemonTeamDto,
   ): Promise<void> {
-    this.logger.log(id);
     if (!ObjectId.isValid(id)) {
       this.logger.warn('Not valid team ID');
       throw new BadRequestException();
     }
 
+    this.logger.log(id);
     this.logger.log(payload);
     await this.db.collection('teams').updateOne(
       { _id: new ObjectId(id) },
@@ -43,10 +43,27 @@ export class PokemonTeamsService {
   }
 
   async deletePokemonTeam(id: string): Promise<void> {
+    if (!ObjectId.isValid(id)) {
+      this.logger.warn('Not valid team ID');
+      throw new BadRequestException();
+    }
     this.logger.log(id);
+
     await this.db.collection('teams').deleteOne({
       _id: new ObjectId(id),
     });
     this.logger.log(`Pokemon team id ${id} is deleted`);
+  }
+
+  async findPokemonTeam(id: string) {
+    if (!ObjectId.isValid(id)) {
+      this.logger.warn('Not valid team ID');
+      throw new BadRequestException();
+    }
+    this.logger.log(id);
+
+    return await this.db
+      .collection<CreatePokemonTeamDto>('teams')
+      .findOne({ _id: new ObjectId(id) });
   }
 }

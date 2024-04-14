@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { PokemonTeamsService } from './pokemon-teams.service';
 import { CreatePokemonTeamDto, UpdatePokemonTeamDto } from './dto';
 
@@ -22,5 +30,10 @@ export class PokemonTeamsController {
   @Delete('delete-team')
   deletePokemonTeam(@Body() id: string): Promise<void> {
     return this.pokemonTeamsService.deletePokemonTeam(id);
+  }
+
+  @Get('find-team/:id')
+  findPokemonTeam(@Param('id') id: string) {
+    return this.pokemonTeamsService.findPokemonTeam(id);
   }
 }
